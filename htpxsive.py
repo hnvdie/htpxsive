@@ -2,7 +2,7 @@ import os
 import sys
 
 def run_httpx(input_file):
-    cmd = f"""cat {input_file} | sort | uniq | httpx -debug-resp -mr 'href="([^"/]+)/"' -er 'href="([^"/]+)/"' | sed 's/href="//g; s/"//g' > extract.txt"""
+    cmd = f"""cat {input_file} | sort | uniq | naabu -silent -tp 1000 | httpx -debug-resp -mr 'href="([^"/]+)/"' -er 'href="([^"/]+)/"' | sed 's/href="//g; s/"//g' > extract.txt"""
     os.system(cmd)
 
 def process_extracted():
